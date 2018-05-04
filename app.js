@@ -34,6 +34,13 @@ app.use(function(req, res, next) {
   next(err);
 });
 
+var mongoose = require('mongoose');
+var mongoDB = 'mongodb+srv://nccucs:nccucs@cluster0-67gm7.mongodb.net/test?replicaSet=[name]&ssl=true&authSource=admin';
+mongoose.connect(mongoDB);
+mongoose.Promise = global.Promise;
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+
 // error handler
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
