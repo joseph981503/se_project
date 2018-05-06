@@ -2,13 +2,17 @@ var mongoose = require('mongoose');
 
 var Schema = mongoose.Schema;
 
-var Test = new Schema(
+var Option = new Schema(
   {
-    name: {type: String}
+    name: { type: String },
+    link: { type: String },
+    category: { type: String },
+    keyword: [{ type: String }],
+    count_click: { type: Number, default: 0 }
   }
 );
 
-let Model = mongoose.model('Test', Test);
+let Model = mongoose.model('Option', Option);
 
 Model.insert = function(data, callback) {
     Model(data).save((err, rsp) => {

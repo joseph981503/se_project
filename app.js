@@ -24,23 +24,37 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.listen(8000);
 
-app.use('/', index);
-app.use('/users', users);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  var err = new Error('Not Found');
-  err.status = 404;
-  next(err);
-});
+
+
 
 var mongoose = require('mongoose');
-var mongoDB = 'mongodb+srv://nccucs:nccucs@cluster0-67gm7.mongodb.net/test?replicaSet=[name]&ssl=true&authSource=admin';
+var mongoDB = 'mongodb://nccucs:nccucs@cluster0-shard-00-00-67gm7.mongodb.net:27017,cluster0-shard-00-01-67gm7.mongodb.net:27017,cluster0-shard-00-02-67gm7.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin';
 mongoose.connect(mongoDB);
 mongoose.Promise = global.Promise;
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
+let session = require('express-session');
+let MongoStore = require('connect-mongo')(session);
+app.use(session({
+    secret: 'asdfasfiqfvkashgvk',
+    saveUninitialized: false,   // don't create session until something stored
+    resave: false,              //don't save session if unmodified
+    store: new MongoStore({
+        mongooseConnection: mongoose.connection
+    })
+}));
+
+
+app.use('/', index);
+app.use('/users', users);
+app.use(function(req, res, next) {
+  var err = new Error('Not Found');
+  err.status = 404;
+  next(err);
+});
 // error handler
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
