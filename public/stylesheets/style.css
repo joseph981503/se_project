@@ -155,7 +155,52 @@ input:focus{
 .filterElement:hover{
   opacity: 0.5;
 }
+.featureBlock.item-0{
+  color: #4C7B9F;
+}
+.featureBlock.item-1{
+  color: #7FC8F4;
+}
+.featureBlock.item-2{
+  color: #C1AB8B;
+}
+.featureBlock.item-3{
+  color: #7D8B7E;
+}
+.featureBlock.item-4{
+  color: #846945;
+}
+.featureBlock.item-5{
+  color: #38663A;
+}
+.featureBlock.item-0:hover{
+  background-color: #4C7B9F;
+  color: white;
+}
+.featureBlock.item-1:hover{
+  background-color: #7FC8F4;
+  color: white;
+}
+.featureBlock.item-2:hover{
+  background-color: #C1AB8B;
+  color: white;
+}
+.featureBlock.item-3:hover{
+  background-color: #7D8B7E;
+  color: white;
+}
+.featureBlock.item-4:hover{
+  background-color: #846945;
+  color: white;
+}
+.featureBlock.item-5:hover{
+  background-color: #38663A;
+  color: white;
+}
 .filterResultArea{
+  margin-top: 15px;
+}
+.searchResultArea{
   margin-top: 15px;
 }
 .searchPanel{
@@ -202,4 +247,45 @@ input:focus{
 }
 .recommendTitle{
   display: none;
+}
+.loginPanel{
+  width: 500px;
+  background-color: white;
+  padding: 60px 40px 60px 40px;
+  margin: auto;
+  position: relative;
+  display: inline-block;
+  text-align: left;
+  margin-top: calc( 50vh - 265px );
+  -webkit-box-shadow: 0px 0px 51px -15px rgba(0,0,0,0.22);
+  -moz-box-shadow: 0px 0px 51px -15px rgba(0,0,0,0.22);
+  box-shadow: 0px 0px 51px -15px rgba(0,0,0,0.22);
+}
+.loginPanel h5{
+  font-size: 21px;
+}
+.loginPanel .loginHint{
+  color: gray;
+}
+.loginPanel .loginGroupHint{
+  margin-bottom: 0px;
+  margin-top: 40px;
+}
+.loginPanel .loginGroupInput{
+  margin-top: 0px;
+  width: 100%;
+}
+.loginPanel button{
+  height: 37px;
+  outline: none;
+  border: none;
+  background-color: #4C7B9F;
+  padding: 0px 40px 0px 40px;
+  color: white;
+  cursor: pointer;
+  float: right;
+  margin-top: 60px;
+}
+.loginPanel button:hover{
+  background-color: #75A0BA;
 }

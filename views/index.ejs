@@ -6,8 +6,177 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
+    <% let code2name=[{
+      code: 101,
+      name: "中文"
+    },{
+      code: 103,
+      name: "歷史"
+    },{
+      code: 104,
+      name: "哲學"
+    },{
+      code: 102,
+      name: "教育"
+    },{
+      code: 202,
+      name: "政治"
+    },{
+      code: 204,
+      name: "社會"
+    },{
+      code: 205,
+      name: "財政"
+    },{
+      code: 206,
+      name: "公行"
+    },{
+      code: 207,
+      name: "地政"
+    },{
+      code: 208,
+      name: "經濟"
+    },{
+      code: 209,
+      name: "民族"
+    },{
+      code: 203,
+      name: "外交"
+    },{
+      code: 301,
+      name: "國貿"
+    },{
+      code: 302,
+      name: "金融"
+    },{
+      code: 303,
+      name: "會計"
+    },{
+      code: 304,
+      name: "統計"
+    },{
+      code: 305,
+      name: "企管"
+    },{
+      code: 306,
+      name: "資管"
+    },{
+      code: 307,
+      name: "財管"
+    },{
+      code: 308,
+      name: "風管"
+    },{
+      code: 401,
+      name: "新聞"
+    },{
+      code: 402,
+      name: "廣告"
+    },{
+      code: 403,
+      name: "廣電"
+    },{
+      code: 404,
+      name: "傳播"
+    },{
+      code: 501,
+      name: "英文"
+    },{
+      code: 502,
+      name: "阿語"
+    },{
+      code: 504,
+      name: "斯語"
+    },{
+      code: 506,
+      name: "日文"
+    },{
+      code: 507,
+      name: "韓文"
+    },{
+      code: 508,
+      name: "土語"
+    },{
+      code: 509,
+      name: "歐語"
+    },{
+      code: 601,
+      name: "法律"
+    },{
+      code: 701,
+      name: "應數"
+    },{
+      code: 702,
+      name: "心理"
+    },{
+      code: 703,
+      name: "資科"
+    }];
+    var colname = "";
+    for(var i = 0;i < code2name.length;i++){
+      if(code2name[i].code==parseInt(account.college)){
+        colname = code2name[i].name;
+      }
+    }
+
+    let y2n=["一","二","三","四"];
+    var year=y2n[Math.max(Math.min((107-parseInt(String(account.username).slice(0,3))),4),1)-1];
+    var categoryItem = [[],[],[],[],[],[],[]];
+    for(var i = 0;i < list.length;i++){
+      switch(list[i].category.name){
+        case '個人':
+          categoryItem[0].push({
+            name: list[i].name,
+            link: list[i].link,
+            keyword: list[i].keyword
+          });
+          break;
+        case '財務':
+        categoryItem[1].push({
+          name: list[i].name,
+          link: list[i].link,
+          keyword: list[i].keyword
+        });
+        break;
+        case '學務':
+        categoryItem[2].push({
+          name: list[i].name,
+          link: list[i].link,
+          keyword: list[i].keyword
+        });
+        break;
+        case '住宿':
+        categoryItem[3].push({
+          name: list[i].name,
+          link: list[i].link,
+          keyword: list[i].keyword
+        });
+        break;
+        case '辦活動':
+        categoryItem[4].push({
+          name: list[i].name,
+          link: list[i].link,
+          keyword: list[i].keyword
+        });
+        break;
+        case '問卷':
+        categoryItem[5].push({
+          name: list[i].name,
+          link: list[i].link,
+          keyword: list[i].keyword
+        });
+        break;
+      }
+    }
+    categoryItem[3][0].keyword=["測試","測試一","測試二"];
+    categoryItem[0]=categoryItem[3];
+    categoryItem[1]=categoryItem[3];
+    categoryItem[2]=categoryItem[3];
+    categoryItem[4]=categoryItem[3];
+    categoryItem[5]=categoryItem[3];
+    %>
     <div class="header">
-      <p>104703002 資科三 王瀚</p>
+      <p><%= account.username %> <%= colname %><%= year %></p>
       <p class="logoutBtn lightBlue">登出</p>
     </div>
     <div class="container mainFeature">
@@ -15,49 +184,57 @@
       <input class="searchInput" placeholder="歡迎光臨，在找什麼功能嗎？"></input>
       <div class="recommendArea featureArea">
         <div class="row">
-          <div class="col-md-6">
-            <a href=#><div class="featureBlock">學生個人基本資料維護</div></a>
-            <a href=#><div class="featureBlock">學生個人基本資料維護</div></a>
-          </div>
-          <div class="col-md-6">
-            <a href=#><div class="featureBlock">學生個人基本資料維護</div></a>
-            <a href=#><div class="featureBlock">學生個人基本資料維護</div></a>
-          </div>
-          <div class="col-md-6">
-            <a href=#><div class="featureBlock">學生個人基本資料維護</div></a>
-            <a href=#><div class="featureBlock">學生個人基本資料維護</div></a>
-          </div>
-          <div class="col-md-6">
-            <a href=#><div class="featureBlock">學生個人基本資料維護</div></a>
-          </div>
+          <% for(var i = 0;i < Math.min(list.length,8);i++){
+              if(i%2==0){
+                %>
+                <div class="col-md-6">
+                  <a href="#"><div class="featureBlock"><%= list[i].name %></div></a>
+                <%
+              }else{
+                %>
+                <a href="#"><div class="featureBlock"><%= list[i].name %></div></a>
+                </div>
+                <%
+              }
+            }
+            if(Math.min(list.length,8)%2!=0){
+              %>
+                </div>
+              <%
+            }
+          %>
         </div>
       </div>
       <div class="categoryArea">
         <div class="filter">
-          <div class="filterElement personal active">個人</div>
-          <div class="filterElement finance">財務</div>
-          <div class="filterElement learn">學務</div>
-          <div class="filterElement dorm">住宿</div>
-          <div class="filterElement activity">辦活動</div>
-          <div class="filterElement survey">問卷</div>
+          <div class="filterElement personal active" data-id="0">個人</div>
+          <div class="filterElement finance" data-id="1">財務</div>
+          <div class="filterElement learn" data-id="2">學務</div>
+          <div class="filterElement dorm" data-id="3">住宿</div>
+          <div class="filterElement activity" data-id="4">辦活動</div>
+          <div class="filterElement survey" data-id="5">問卷</div>
         </div>
         <div class="filterResultArea featureArea">
           <div class="row">
-            <div class="col-md-6">
-              <a href=#><div class="featureBlock">學生個人基本資料維護</div></a>
-              <a href=#><div class="featureBlock">學生個人基本資料維護</div></a>
-            </div>
-            <div class="col-md-6">
-              <a href=#><div class="featureBlock">學生個人基本資料維護</div></a>
-              <a href=#><div class="featureBlock">學生個人基本資料維護</div></a>
-            </div>
-            <div class="col-md-6">
-              <a href=#><div class="featureBlock">學生個人基本資料維護</div></a>
-              <a href=#><div class="featureBlock">學生個人基本資料維護</div></a>
-            </div>
-            <div class="col-md-6">
-              <a href=#><div class="featureBlock">學生個人基本資料維護</div></a>
-            </div>
+            <% for(var i = 0;i < categoryItem[0].length;i++){
+                if(i%2==0){
+                  %>
+                  <div class="col-md-6">
+                    <a href="#"><div class="featureBlock item-<%= 0 %>"><%= categoryItem[0][i].name %></div></a>
+                  <%
+                }else{
+                  %>
+                  <a href="#"><div class="featureBlock item-<%= 0 %>"><%= categoryItem[0][i].name %></div></a>
+                  </div>
+                  <%
+                }
+              }
+              if(categoryItem[0].length%2!=0){
+                %>
+                  </div>
+                <%
+              }
+            %>
           </div>
         </div>
       </div>
@@ -66,13 +243,32 @@
       <div class="container searchPanelContent">
         <p class="recommendTitle">推薦關鍵字</p>
         <div class="recommendKeyWord">
-          <div class="keyWordElement">個人</div>
-          <div class="keyWordElement">個人</div>
-          <div class="keyWordElement">個人</div>
+          <div class="keyWordElement">住宿</div>
+          <div class="keyWordElement">申請</div>
+          <div class="keyWordElement">查詢</div>
+        </div>
+        <div class="searchResultArea featureArea">
+          <div class="row">
+          </div>
         </div>
       </div>
     </div>
     <script>
+      var categoryItem = [[],[],[],[],[],[]];
+      <%
+        for(var i = 0; i < categoryItem.length;i++){
+          for(var j = 0; j < categoryItem[i].length;j++){
+            %>
+              categoryItem[<%= i %>].push({
+                name: "<%= categoryItem[i][j].name %>",
+                link: "<%= categoryItem[i][j].link %>",
+                keyword: "<%= categoryItem[i][j].keyword %>"
+              });
+            <%
+          }
+        }
+      %>
+      var alphModi = ['ㄅ','ㄆ','ㄇ','ㄈ','ㄉ','ㄊ','ㄋ','ㄌ','ㄍ','ㄎ','ㄏ','ㄐ','ㄑ','ㄒ','ㄔ','ㄕ','ㄖ','ㄗ','ㄘ','ㄙ','ㄧ','ㄨ','ㄩ','ㄛ','ㄜ','ㄝ','ㄞ','ㄟ','ㄠ','ㄡ','ㄦ','ㄥ'];
       $(document).keyup(function(e) {
        if (e.keyCode == 27) { // escape key maps to keycode `27`
           if($('h4').hasClass('inSearch')){
@@ -97,6 +293,85 @@
           $('.recommendTitle').delay(250).fadeIn(500,'easeInOutQuint');
         }
       });
+      $('body').on('click','.logoutBtn',function(){
+        $.post('/ajax_logout',{},function(){
+          window.location = "/login";
+        });
+      });
+      $('body').on('click','.filterElement',function(){
+        console.log(categoryItem);
+        if($(this).hasClass('active')){
+          $(this).removeClass('active');
+        }else{
+          $(this).addClass('active');
+        }
+        var filterResult = [];
+        var filterKey = [];
+        var k = 0;
+        $('.filterElement.active').each(function(){
+          filterKey[k]=$(this).data('id');
+          k++;
+        });
+        for(var i = 0; i < filterKey.length;i++){
+          for(var j = 0;j < categoryItem[filterKey[i]].length;j++){
+            filterResult.push({
+              name: categoryItem[filterKey[i]][j].name,
+              link: categoryItem[filterKey[i]][j].link,
+              item: filterKey[i]
+            });
+          }
+        }
+        $('.filterResultArea .col-md-6').remove();
+        for(var i = 0;i < filterResult.length;i++){
+          if($('.filterResultArea').find('.featureBlock').length%2==0 || $('.filterResultArea').find('.featureBlock').length==0){
+            $('.filterResultArea').find('.row').append('<div class="col-md-6"><a href="#"><div class="featureBlock item-'+filterResult[i].item+'">'+filterResult[i].name+'</div></a></div>');
+          }else{
+            console.log('test');
+            $('.filterResultArea').find('.col-md-6').last().append('<a href="#"><div class="featureBlock item-'+filterResult[i].item+'">'+filterResult[i].name+'</div></a>');
+          }
+        }
+      });
+      $('body').on('click','.keyWordElement',function(){
+        $('.searchInput').val($(this).html());
+        search();
+        $('.searchInput').focus();
+      });
+      $('body').on('input','.searchInput',function(){
+        search();
+      });
+      function search(){
+        var nComplete = 0;
+        for(var i = 0; i < alphModi.length; i++){
+          if(String($('.searchInput').val()).indexOf(alphModi[i])>=0)nComplete++;
+        }
+        if(nComplete==0){
+          var searchResult = [];
+          for(var i = 0; i < categoryItem.length;i++){
+            for(var j = 0; j < categoryItem[i].length;j++){
+              if(String(categoryItem[i][j].name).indexOf(String($('.searchInput').val()))>=0){
+                searchResult.push({
+                  name: categoryItem[i][j].name,
+                  link: categoryItem[i][j].link,
+                  item: i
+                });
+              }else{
+                console.log(String(categoryItem[i][j].name)+':'+String($('.searchInput').val()));
+              }
+            }
+          }
+          console.log(searchResult);
+          if($('.searchInput').val()=="")searchResult=[];
+          $('.searchResultArea .col-md-6').remove();
+          for(var i = 0;i < searchResult.length;i++){
+            if($('.searchResultArea').find('.featureBlock').length%2==0 || $('.searchResultArea').find('.featureBlock').length==0){
+              $('.searchResultArea').find('.row').append('<div class="col-md-6"><a href="#"><div class="featureBlock item-'+searchResult[i].item+'">'+searchResult[i].name+'</div></a></div>');
+            }else{
+              console.log('test');
+              $('.searchResultArea').find('.col-md-6').last().append('<a href="#"><div class="featureBlock item-'+searchResult[i].item+'">'+searchResult[i].name+'</div></a>');
+            }
+          }
+        }
+      }
     </script>
   </body>
 </html>

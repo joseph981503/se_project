@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <%- include('./layout/include_header') %>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src="/javascripts/md5.js"></script>
+  </head>
+  <body style="text-align: center">
+    <div class="loginPanel">
+      <h5>歡迎使用政大學生校務系統</h5>
+      <p class="loginHint">輸入您的學號與密碼以繼續</p>
+      <p class="loginGroupHint">學號</p>
+      <input class="loginGroupInput inputUser" type="text" placeholder="請輸入學號(ex:104703002)"></input>
+      <p class="loginGroupHint">密碼</p>
+      <input class="loginGroupInput inputPass" type="password" placeholder="請輸入密碼"></input>
+      <button>確定</button>
+    </div>
+  </body>
+  <script>
+  $(document).keyup(function(e) {
+   if (e.keyCode == 13) {
+      if($('.inputPass').val()!=""&&$('.inputUser').val()!=""){
+        var hash = hex_md5($('.inputPass').val());
+        $.post('/ajax_login',{
+          username:$('.inputUser').val(),
+          pwd:hash
+        },function(rtn){
+          if(rtn.status){
+            window.location = "/";
+          }else{
+            alert(rtn.msg);
+          }
+        });
+      }
+    }
+  });
+    $(document).ready(function(){
+      $('.inputUser').focus();
+    });
+    $('body').on('click','button',function(){
+      var hash = hex_md5($('.inputPass').val());
+      $.post('/ajax_login',{
+        username:$('.inputUser').val(),
+        pwd:hash
+      },function(rtn){
+        if(rtn.status){
+          window.location = "/";
+        }else{
+          alert(rtn.msg);
+        }
+      });
+    });
+  </script>
+</html>

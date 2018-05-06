@@ -9,7 +9,7 @@ let async = require('async');
 
 function checkAuth(req, res, next) {
   if (!req.session.user_id) {
-    res.send('You are not authorized to view this page');
+    res.redirect('/login');
   } else {
     next();
   }
@@ -35,7 +35,7 @@ router.get('/', checkAuth, function(req, res, next) {
                 next(err);
             } else {
                 res.render('index', {
-                    title: 'Express',
+                    title: '政大學生校務行政系統',
                     list: rsp,
                     account: data.account
                 });
@@ -56,7 +56,7 @@ router.post('/ajax_login', (req, res, next) => {
             });
         }
         if (rsp) {
-            req.session.user_id = result._id;
+            req.session.user_id = rsp._id;
             res.json({
                 status: true
             });
@@ -69,7 +69,7 @@ router.post('/ajax_login', (req, res, next) => {
     });
 });
 
-router.get('/ajax_logout', function(req, res, next) {
+router.post('/ajax_logout', function(req, res, next) {
   if (req.session) {
     req.session.destroy(function(err) {
       if(err) {
@@ -80,6 +80,13 @@ router.get('/ajax_logout', function(req, res, next) {
     });
   }
 });
+
+router.get('/login', function(req, res, next) {
+  res.render('login', {
+      title: '登入'
+  });
+});
+
 
 
 
