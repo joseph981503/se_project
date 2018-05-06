@@ -2,6 +2,10 @@ var express = require('express');
 var router = express.Router();
 var crypto = require('crypto');
 var Account = require('../models/m_account');
+var Category = require('../models/m_category');
+var Option = require('../models/m_option');
+let async = require('async');
+
 
 function checkAuth(req, res, next) {
   if (!req.session.user_id) {
@@ -13,9 +17,31 @@ function checkAuth(req, res, next) {
 
 /* GET home page. */
 router.get('/', checkAuth, function(req, res, next) {
-    res.render('index', {
-        title: 'Express'
-    });
+    let data = {};
+    async.series([function(callback){
+        Account.detail({
+            _id: req.session.user_id
+        }, (err, rsp) => {
+            if (err){
+                next(err);
+            } else {
+                data.account = rsp;
+                callback();
+            }
+        });
+    }, function(callback){
+        Option.list({}, (err, rsp) => {
+            if (err){
+                next(err);
+            } else {
+                res.render('index', {
+                    title: 'Express',
+                    list: rsp,
+                    account: data.account
+                });
+            }
+        });
+    }]);
 });
 
 router.post('/ajax_login', (req, res, next) => {
@@ -29,7 +55,7 @@ router.post('/ajax_login', (req, res, next) => {
                 msg: err
             });
         }
-        if (result) {
+        if (rsp) {
             req.session.user_id = result._id;
             res.json({
                 status: true
@@ -54,6 +80,7 @@ router.get('/ajax_logout', function(req, res, next) {
     });
   }
 });
+
 
 
 module.exports = router;

@@ -6,7 +6,7 @@ var Option = new Schema(
   {
     name: { type: String },
     link: { type: String },
-    category: { type: String },
+    category: { type: String, ref: "Category"},
     keyword: [{ type: String }],
     count_click: { type: Number, default: 0 }
   }
@@ -29,6 +29,7 @@ Model.delete = function(data, callback) {
 
 Model.list = function(data, callback) {
   Model.find(data).
+  populate("category").
   	exec((err, rsp)=>{
   		callback(err, rsp);
   	});
