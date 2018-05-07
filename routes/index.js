@@ -14,7 +14,30 @@ function checkAuth(req, res, next) {
     next();
   }
 }
-
+/*
+router.get('/insert', (req, res, next) => {
+    let data = ['本學期教學意⾒調查', '表單服務系統'];
+    async.each(data, function(item, callback){
+        Option.insert({
+            name: item,
+            link: '#',
+            category: '5aefd3a9578ca541940908bb',
+        }, (err, rsp) => {
+            if (err){
+                callback(err);
+            } else {
+                callback();
+            }
+        });
+    }, function(error){
+        if (error){
+            next(error);
+        } else {
+            res.send('success');
+        }
+    });
+});
+*/
 /* GET home page. */
 router.get('/', checkAuth, function(req, res, next) {
     let data = {};
