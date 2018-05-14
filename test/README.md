@@ -14,5 +14,5 @@
 4. 有些inccu 校務系統有的學生的功能， 沒有放到網頁上， 但是我寫的test 剛好有包含到
 
 # 錯誤偵測/回報
-如果有錯誤可以先到 `<project-root>/testing/errorShots` 看發生錯誤時自動擷的瀏覽器圖片  
+如果有錯誤可以先到 `<project-root>/test/errorShots` 看發生錯誤時自動擷的瀏覽器圖片  
 如果覺得測試code 有問題可以再聯絡我
