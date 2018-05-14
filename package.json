@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www"
+    "start": "nodemon ./bin/www",
+    "test": "wdio ./test/wdio.conf.js"
   },
   "dependencies": {
     "body-parser": "~1.18.2",
@@ -15,6 +16,18 @@
     "mongoose": "^5.0.17",
     "morgan": "~1.9.0",
     "nodemon": "^1.17.3",
-    "serve-favicon": "~2.4.5"
+    "serve-favicon": "~2.4.5",
+    "underscore": "^1.9.0"
+  },
+  "devDependencies": {
+    "assert": "^1.4.1",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-register": "^6.26.0",
+    "chai": "^4.1.2",
+    "cucumber": "^4.2.1",
+    "wdio-cucumber-framework": "^2.1.0",
+    "wdio-dot-reporter": "0.0.9",
+    "wdio-selenium-standalone-service": "0.0.10",
+    "webdriverio": "^4.12.0"
   }
 }
