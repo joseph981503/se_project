@@ -2,13 +2,14 @@ var mongoose = require('mongoose');
 
 var Schema = mongoose.Schema;
 
-var Test = new Schema(
+var Category = new Schema(
   {
-    name: {type: String}
+    name: { type: String },
+    color_code: { type: String }
   }
 );
 
-let Model = mongoose.model('Test', Test);
+let Model = mongoose.model('Category', Category);
 
 Model.insert = function(data, callback) {
     Model(data).save((err, rsp) => {
