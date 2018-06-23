@@ -1,0 +1,141 @@
+body{
+  background-color: #FCFCFC;
+  padding: 20px;
+}
+
+body, div, p, font, label, table, button, input, h1, h2, h3, h4, h5{
+  font-family: PingFangTC-Regular, PingFangTC-Thin,PingFangTC-Semibold,Microsoft JhengHei, sans-serif;
+  color: #102329;
+  user-select: none;
+}
+div,p,label,table,button,input{
+  font-size: 15px;
+}
+.shadow{
+  -webkit-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+  -moz-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+  box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+}
+.personal-area{
+  padding: 15px;
+}
+.logout-btn{
+  height: 37px;
+  line-height: 37px;
+  padding: 0px 20px 0px 20px;
+  border: none;
+  background-color: #4C7B9F;
+  color: white;
+  cursor: pointer;
+  float: right;
+  margin-top: 7px;
+  font-size: 15px;
+}
+.logout-btn:hover{
+  background-color: #76A4C1;
+}
+.personal-img{
+  width: 55px;
+  height: 55px;
+  background-color: gray;
+  float: left;
+  margin-right: 15px;
+}
+.personal-name{
+  font-size: 21px;
+  margin-bottom: 5px;
+}
+.personal-dep{
+  margin-top: 0px;
+  color: gray;
+  margin-bottom: 0px;
+}
+.block-title{
+  width: 100%;
+  text-align: center;
+  font-size: 18px;
+  padding-top: 20px;
+  margin-bottom: 20px;
+}
+.block-title span{
+  border-bottom: 2px solid #4C7B9F;
+}
+.news-block{
+  width: 100%;
+  padding: 0px 30px 15px 30px;
+}
+.news-block p{
+  font-size: 10px;
+  color: gray;
+  margin-bottom: 0px;
+}
+.news-block h5{
+  margin-top: 5px;
+  font-size: 15px;
+  color: #282A46;
+}
+.news-seperator{
+  height: 2px;
+  width: 100px;
+  margin: auto;
+  background-color: lightgray;
+}
+.calendar-control{
+  padding: 0px 15px 0px 15px;
+  max-width: 300px;
+  margin: auto;
+}
+.prev-mon-btn{
+  font-size: 21px;
+  float: left;
+}
+.next-mon-btn{
+  font-size: 21px;
+  float: right;
+}
+.calendar-control h5{
+  line-height: 35px;
+  text-align: center;
+}
+.calendar-content{
+  padding: 0px 15px 0px 15px;
+}
+.calendar-content table{
+  width: 100%;
+  table-layout: fixed;
+  text-align: center;
+}
+.calendar-content th{
+  padding-bottom: 15px;
+}
+.calendar-content td{
+  padding: 5px 0px 5px 0px;
+}
+.calendar-content td div{
+  background-color: #4C7B9F;
+  color: white;
+  width: 25px;
+  height: 25px;
+  margin: auto;
+  border-radius: 40px;
+  line-height: 25px;
+}
+.school-sche{
+  padding-bottom: 20px;
+}
+.event-content{
+  max-width: 400px;
+  margin: auto;
+}
+.event-date-tag{
+  width: 25px;
+  height: 25px;
+  background-color: #4C7B9F;
+  color: white;
+  text-align: center;
+  border-radius: 30px;
+  line-height: 25px;
+}
+.link-area a{
+  margin-right: 30px;
+}

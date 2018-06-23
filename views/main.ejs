@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <%- include('./layout/include_header') %>
+    <link rel='stylesheet' href='/stylesheets/main.css' />
+  </head>
+  <body>
+    <div class="container" style="margin-top: 40px;">
+      <div class="personal-area shadow">
+        <button class="logout-btn">登出</button>
+        <img class="personal-img" />
+        <h3 class="personal-name">王瀚</h3>
+        <p class="personal-dep">資訊科學系 三年級(104703002)</p>
+      </div>
+      <div class="personal-area link-area shadow" style="margin-top: 15px;text-align: center;">
+        <a href="/">校務系統</a>
+        <a href="#">WM5數位學習網</a>
+        <a href="#">NCCU郵件信箱</a>
+      </div>
+      <div class="row" style="margin-top: 15px;">
+        <div class="col-md-6" style="padding-right: 7.5px;">
+          <div class="school-news shadow">
+            <h3 class="block-title"><span>校園公告</span></h3>
+            <div class="news-block">
+              <p>2018.06.10</p>
+              <h5>【重要公告】6/20起至7/6期間，請變更政大郵件帳號密碼</h5>
+            </div>
+            <div class="news-block">
+              <p>2018.06.10</p>
+              <h5>「教學優良教師遴選問卷調查」上線囉</h5>
+            </div>
+            <div class="news-block">
+              <p>2018.06.10</p>
+              <h5>期末教學意見調查開始</h5>
+            </div>
+            <div class="news-block">
+              <p>2018.06.10</p>
+              <h5>107學年度高級中等以上學校運動成績優良學生升學輔導甄審、甄試分發結果注意事項</h5>
+            </div>
+            <div class="news-block">
+              <p>2018.06.10</p>
+              <h5>107學年度斯拉夫語文學程自即日起至7/10日止受理申請</h5>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6" style="padding-left: 7.5px;">
+          <div class="school-sche shadow">
+            <h3 class="block-title"><span>行事曆</span></h3>
+            <div class="calendar-control">
+              <span class="prev-mon-btn"><</span>
+              <span class="next-mon-btn">></span>
+              <h5>2018 五月</h5>
+            </div>
+            <div class="calendar-content">
+              <table>
+                <tr>
+                  <th>週日</th>
+                  <th>週一</th>
+                  <th>週二</th>
+                  <th>週三</th>
+                  <th>週四</th>
+                  <th>週五</th>
+                  <th>週六</th>
+                </tr>
+              </table>
+            </div>
+            <hr>
+            <div style="padding: 15px;">
+              <table class="event-content">
+                <tr>
+                  <td style="width: 40px;"><div class="event-date-tag">6</div></td>
+                  <td>碩士班轉系所申請</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+
+        </div>
+      </div>
+    </div>
+  </body>
+  <script>
+  var dd = new Date();
+  function getAllDate(da) {
+    var cal = [];
+    var d = new Date(da.getTime());
+    d.setDate(1);
+    d.setDate(d.getDate()-d.getDay());
+    var week = 0;
+    for(week=0;week<6;week++){
+      var thisweek = {
+        id: week,
+        date: []
+      }
+      for(var i=0;i<7;i++){
+        var nd = new Date(d);
+        thisweek.date[i]=nd;
+        d.setDate(d.getDate()+1);
+        //console.log(this.state.startDate);
+      }
+      cal.push(thisweek);
+    }
+    return cal;
+  }
+  $(document).ready(function(){
+    var nc = getAllDate(dd);
+    for(var i=0;i<nc.length;i++){
+      var tdgroup="<tr>";
+      for(var j=0;j<nc[i].date.length;j++){
+        if(parseInt(nc[i].date[j].getMonth())!=parseInt(dd.getMonth())){
+          tdgroup+="<td style='color: lightgray;'>"+nc[i].date[j].getDate()+"</td>";
+        }else if(parseInt(nc[i].date[j].getDate())==6){
+          tdgroup+="<td><div>"+nc[i].date[j].getDate()+"</div></td>";
+        }else{
+          tdgroup+="<td>"+nc[i].date[j].getDate()+"</td>";
+        }
+      }
+      tdgroup+="</tr>"
+      $('.calendar-content').find('table>tbody').append(tdgroup);
+    }
+  });
+  </script>
+</html>
