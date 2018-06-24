@@ -6,7 +6,7 @@ var Record = new Schema(
   {
     account_id: { type: String, ref: "Account" },
     option_id: { type: String, ref: "Option" },
-    college_id: { type: String }, 
+    college_id: { type: String },
     date: { type: Date, default: Date.now },
   }
 );
@@ -33,6 +33,14 @@ Model.list = function(data, callback) {
   	});
 }
 
+Model.date_list = function(data, callback) {
+  Model.find(data).
+  populate('option_id').
+  sort({ date: 'desc' }).
+  	exec((err, rsp)=>{
+  		callback(err, rsp);
+  	});
+}
 
 Model.detail = function(data, callback) {
     Model.findOne(data).

@@ -126,6 +126,7 @@
       switch(list[i].category.name){
         case '個人':
           categoryItem[0].push({
+            _id: list[i]._id,
             name: list[i].name,
             link: list[i].link,
             keyword: list[i].keyword
@@ -133,6 +134,7 @@
           break;
         case '財務':
         categoryItem[1].push({
+          _id: list[i]._id,
           name: list[i].name,
           link: list[i].link,
           keyword: list[i].keyword
@@ -140,6 +142,7 @@
         break;
         case '學務':
         categoryItem[2].push({
+            _id: list[i]._id,
           name: list[i].name,
           link: list[i].link,
           keyword: list[i].keyword
@@ -147,6 +150,7 @@
         break;
         case '住宿':
         categoryItem[3].push({
+            _id: list[i]._id,
           name: list[i].name,
           link: list[i].link,
           keyword: list[i].keyword
@@ -154,6 +158,7 @@
         break;
         case '辦活動':
         categoryItem[4].push({
+            _id: list[i]._id,
           name: list[i].name,
           link: list[i].link,
           keyword: list[i].keyword
@@ -161,6 +166,7 @@
         break;
         case '問卷':
         categoryItem[5].push({
+            _id: list[i]._id,
           name: list[i].name,
           link: list[i].link,
           keyword: list[i].keyword
@@ -179,20 +185,20 @@
       <input class="searchInput" placeholder="歡迎光臨，在找什麼功能嗎？"></input>
       <div class="recommendArea featureArea">
         <div class="row">
-          <% for(var i = 0;i < Math.min(list.length,8);i++){
+          <% for(var i = 0;i < Math.min(fav_list.length,8);i++){
               if(i%2==0){
                 %>
                 <div class="col-md-6">
-                  <a href="#"><div class="featureBlock"><%= list[i].name %></div></a>
+                  <a href="#"><div class="featureBlock"><%= fav_list[i] %></div></a>
                 <%
               }else{
                 %>
-                <a href="#"><div class="featureBlock"><%= list[i].name %></div></a>
+                <a href="#"><div class="featureBlock"><%= fav_list[i] %></div></a>
                 </div>
                 <%
               }
             }
-            if(Math.min(list.length,8)%2!=0){
+            if(Math.min(fav_list.length,8)%2!=0){
               %>
                 </div>
               <%
@@ -215,11 +221,11 @@
                 if(i%2==0){
                   %>
                   <div class="col-md-6">
-                    <a href="#"><div class="featureBlock item-<%= 0 %>"><%= categoryItem[0][i].name %></div></a>
+                    <a class="option" data-id="<%= categoryItem[0][i]._id %>" href="#"><div class="featureBlock item-<%= 0 %>"><%= categoryItem[0][i].name %></div></a>
                   <%
                 }else{
                   %>
-                  <a href="#"><div class="featureBlock item-<%= 0 %>"><%= categoryItem[0][i].name %></div></a>
+                  <a class="option" data-id="<%= categoryItem[0][i]._id %>" href="#"><div class="featureBlock item-<%= 0 %>"><%= categoryItem[0][i].name %></div></a>
                   </div>
                   <%
                 }
@@ -238,9 +244,12 @@
       <div class="container searchPanelContent">
         <p class="recommendTitle">推薦關鍵字</p>
         <div class="recommendKeyWord">
-          <div class="keyWordElement">住宿</div>
+          <% for(let i = 0; i< recommend_list.length;i++){ %>
+             <div class="keyWordElement"><%= recommend_list[i] %></div>
+          <% } %>
+          <!-- <div class="keyWordElement">住宿</div>
           <div class="keyWordElement">申請</div>
-          <div class="keyWordElement">查詢</div>
+          <div class="keyWordElement">查詢</div> -->
         </div>
         <div class="searchResultArea featureArea">
           <div class="row">
@@ -255,6 +264,7 @@
           for(var j = 0; j < categoryItem[i].length;j++){
             %>
               categoryItem[<%= i %>].push({
+                _id: "<%= categoryItem[i][j]._id %>",
                 name: "<%= categoryItem[i][j].name %>",
                 link: "<%= categoryItem[i][j].link %>",
                 keyword: "<%= categoryItem[i][j].keyword %>"
@@ -310,6 +320,7 @@
         for(var i = 0; i < filterKey.length;i++){
           for(var j = 0;j < categoryItem[filterKey[i]].length;j++){
             filterResult.push({
+              _id: categoryItem[filterKey[i]][j]._id,
               name: categoryItem[filterKey[i]][j].name,
               link: categoryItem[filterKey[i]][j].link,
               item: filterKey[i]
@@ -319,10 +330,10 @@
         $('.filterResultArea .col-md-6').remove();
         for(var i = 0;i < filterResult.length;i++){
           if($('.filterResultArea').find('.featureBlock').length%2==0 || $('.filterResultArea').find('.featureBlock').length==0){
-            $('.filterResultArea').find('.row').append('<div class="col-md-6"><a href="#"><div class="featureBlock item-'+filterResult[i].item+'">'+filterResult[i].name+'</div></a></div>');
+            $('.filterResultArea').find('.row').append('<div class="col-md-6"><a class="option" data-id="'+filterResult[i]._id+'" href="#"><div class="featureBlock item-'+filterResult[i].item+'">'+filterResult[i].name+'</div></a></div>');
           }else{
             console.log('test');
-            $('.filterResultArea').find('.col-md-6').last().append('<a href="#"><div class="featureBlock item-'+filterResult[i].item+'">'+filterResult[i].name+'</div></a>');
+            $('.filterResultArea').find('.col-md-6').last().append('<a class="option" data-id="'+filterResult[i]._id+'" href="#"><div class="featureBlock item-'+filterResult[i].item+'">'+filterResult[i].name+'</div></a>');
           }
         }
       });
@@ -345,6 +356,7 @@
             for(var j = 0; j < categoryItem[i].length;j++){
               if(String(categoryItem[i][j].name).indexOf(String($('.searchInput').val()))>=0){
                 searchResult.push({
+                    _id: categoryItem[i][j]._id,
                   name: categoryItem[i][j].name,
                   link: categoryItem[i][j].link,
                   item: i
@@ -359,14 +371,35 @@
           $('.searchResultArea .col-md-6').remove();
           for(var i = 0;i < searchResult.length;i++){
             if($('.searchResultArea').find('.featureBlock').length%2==0 || $('.searchResultArea').find('.featureBlock').length==0){
-              $('.searchResultArea').find('.row').append('<div class="col-md-6"><a href="#"><div class="featureBlock item-'+searchResult[i].item+'">'+searchResult[i].name+'</div></a></div>');
+              $('.searchResultArea').find('.row').append('<div class="col-md-6"><a class="option" data-id="'+searchResult[i]._id+'" href="#"><div class="featureBlock item-'+searchResult[i].item+'">'+searchResult[i].name+'</div></a></div>');
             }else{
               console.log('test');
-              $('.searchResultArea').find('.col-md-6').last().append('<a href="#"><div class="featureBlock item-'+searchResult[i].item+'">'+searchResult[i].name+'</div></a>');
+              $('.searchResultArea').find('.col-md-6').last().append('<a class="option" data-id="'+searchResult[i]._id+'" href="#"><div class="featureBlock item-'+searchResult[i].item+'">'+searchResult[i].name+'</div></a>');
             }
           }
         }
       }
+      $('body').on('click','.option',function(){
+          var data = {
+              option_id:$(this).data('id'),
+              college_id:"703"
+          };
+          $.post("/ajax_click_count",data,function(data){
+              if(data.status){
+                  console.log("success 1")
+              } else {
+                  console.log("failed 1")
+              }
+          })
+
+          $.post("/ajax_self_click_count",data,function(data){
+              if(data.status){
+                  console.log("success 2")
+              } else {
+                  console.log("failed 2")
+              }
+          })
+      });
     </script>
   </body>
 </html>
