@@ -35,6 +35,14 @@ Model.list = function(data, callback) {
   	});
 }
 
+Model.sort_list = function(data,callback){
+    Model.find(data).
+    sort({ count_click: 'desc' }).
+    populate("category").
+      exec((err, rsp)=>{
+          callback(err, rsp);
+      });
+}
 
 Model.detail = function(data, callback) {
     Model.findOne(data).
