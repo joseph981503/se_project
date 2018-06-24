@@ -63,4 +63,4 @@ typings/
 node_modules
 
 # error screeshot of testing
-./test/errorShots/*
+./test/errorShots/*.png
