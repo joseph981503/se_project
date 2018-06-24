@@ -38,6 +38,9 @@ mongoose.connect(mongoDB);
 mongoose.Promise = global.Promise;
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+db.once('open', function callback () {
+  console.log("Database Connected.");
+});
 
 let session = require('express-session');
 let MongoStore = require('connect-mongo')(session);
