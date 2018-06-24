@@ -5,6 +5,7 @@ var Account = require('../models/m_account');
 var Category = require('../models/m_category');
 var Option = require('../models/m_option');
 var Record = require('../models/m_record');
+var Calendar = require('../models/m_calendar');
 let async = require('async');
 
 // Date.prototype.yyyymmdd = function () {
@@ -26,6 +27,8 @@ function checkAuth(req, res, next) {
     next();
   }
 }
+
+let r_show = [{header: "碩士班轉系所申請", date: "0601"},{header: "碩士班轉系所申請", date: "0602"},{header: "碩士班轉系所申請", date: "0603"},{header: "碩士班轉系所申請", date: "0604"},{header: "碩士班轉系所申請", date: "0605"},{header: "碩士班轉系所申請", date: "0606"},{header: "碩士班轉系所申請", date: "0607"},{header: "碩士班轉系所申請", date: "0608"},{header: "碩士班轉系所申請", date: "0609"},{header: "碩士班轉系所申請", date: "0610"},{header: "碩士班轉系所申請", date: "0611"},{header: "碩士班轉系所申請", date: "0612"},{header: "碩士班轉系所申請", date: "0613"},{header: "碩士班轉系所申請", date: "0614"},{header: "碩士班轉系所申請", date: "0615"},{header: "碩士班轉系所申請", date: "0616"},{header: "碩士班轉系所申請", date: "0617"},{header: "碩士班轉系所申請", date: "0618"},{header: "碩士班轉系所申請", date: "0619"},{header: "碩士班轉系所申請", date: "0620"},{header: "碩士班轉系所申請", date: "0621"},{header: "碩士班轉系所申請", date: "0622"},{header: "碩士班轉系所申請", date: "0623"},{header: "碩士班轉系所申請", date: "0624"},{header: "碩士班轉系所申請", date: "0625"},{header: "碩士班轉系所申請", date: "0626"},{header: "碩士班轉系所申請", date: "0627"},{header: "碩士班轉系所申請", date: "0628"},{header: "碩士班轉系所申請", date: "0629"},{header: "碩士班轉系所申請", date: "0630"},{header: "第 2 次教務會議", date: "0604"},{header: "學雜費減免申請", date: "0605"},{header: "學雜費減免申請", date: "0604"},{header: "學雜費減免申請", date: "0606"},{header: "學雜費減免申請", date: "0607"},{header: "學雜費減免申請", date: "0608"},{header:"	畢業典禮", date: "0609"},{header: "校務會議", date: "0615"},{header: "端午節", date: "0618"},{header: "申請休學、學位考試截止日", date: "0621"},{header: "期末隨堂考試", date: "0625"},{header: "期末隨堂考試", date: "0626"},{header: "期末隨堂考試", date: "0627"},{header: "期末隨堂考試", date: "0628"},{header: "期末隨堂考試", date: "0629"}];
 
 /// 學院別
 let first_college = [101,103,104]; // 文學院
@@ -437,12 +440,19 @@ router.get('/login', function(req, res, next) {
 });
 
 router.get('/main', function(req, res, next) {
-  res.render('main', {
-      title: '登入'
-  });
+    async.series([function(callback){
+        Calendar.list({}, (err, rsp) => {
+            if (err){
+                next(err);
+            } else {
+                res.render('main', {
+                    title: '登入',
+                    calendar: rsp
+                });
+            }
+        });
+    }]);
+
 });
-
-
-
 
 module.exports = router;
