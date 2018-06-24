@@ -365,6 +365,16 @@ router.post('/ajax_login', (req, res, next) => {
     });
 });
 
+router.get('/test100', function(req,res,next){
+  Category.list({},(err,rsp)=>{
+    if(err){
+      res.send(err);
+    }else{
+      res.send(rsp);
+    }
+  });
+});
+
 router.post('/ajax_logout', function(req, res, next) {
   if (req.session) {
     req.session.destroy(function(err) {
