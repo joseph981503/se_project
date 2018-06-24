@@ -235,14 +235,11 @@ router.get('/', checkAuth, function(req, res, next) {
             if(err){
                 console.log("err: "+err)
             } else {
-                console.log(rsp)
                 for(let i = 0;i<10;i++){
-                    console.log(rsp[i].keyword);
                     if(rsp[i].keyword.length != 0){
                         data.recommend_list = data.recommend_list.concat(rsp[i].keyword);
                     }
                     if(i == 9){
-                        console.log(data.recommend_list);
                         var origin = data.recommend_list
                         var result = origin.reduce((obj, item) => {
                             obj[item] = 1;
@@ -262,13 +259,19 @@ router.get('/', checkAuth, function(req, res, next) {
             if(err){
                 console.log("err: "+err)
             } else {
-                console.log("length: "+rsp.length);
-                for(let i = 0;i<Math.min(5,rsp.length);i++){
+                for(let i = 0;i<rsp.length;i++){
                     if( typeof rsp[i].option_id.name != "undefined"){
                         data.record_list.push(rsp[i].option_id.name);
                     }
                 }
-                console.log(data.record_list);
+                var origin = data.record_list;
+                var result = origin.reduce((obj, item) => {
+                    obj[item] = 1;
+                    return obj;
+                }, {});
+                data.record_list = Object.keys(result);
+                data.record_list = data.record_list.slice(0,5);
+                console.log(data.record_list)
                 data.fav_list = data.record_list;
                 callback();
             }
