@@ -3,6 +3,24 @@ body{
   padding: 20px;
 }
 
+.st-loading{
+  position: fixed;
+  background-color: rgba(0,0,0,0.8);
+  width: 100vw;
+  height: 100vh;
+  z-index: 2000;
+  text-align: center;
+  display: none;
+  margin-left: -20px;
+  margin-top: -20px;
+}
+
+.st-loading img{
+  width: 100px;
+  margin: auto;
+  margin-top: calc( 50vh - 50px );
+}
+
 body, div, p, font, label, table, button, input, h1, h2, h3, h4, h5{
   font-family: PingFangTC-Regular, PingFangTC-Thin,PingFangTC-Semibold,Microsoft JhengHei, sans-serif;
   color: #102329;

@@ -32,7 +32,7 @@ app.listen(8000);
 
 
 var mongoose = require('mongoose');
-var mongoDB = 'mongodb+srv://nccucs:nccucs@cluster0-67gm7.mongodb.net/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin';
+var mongoDB = 'mongodb://nccucs:nccucs@cluster0-shard-00-00-67gm7.mongodb.net:27017,cluster0-shard-00-01-67gm7.mongodb.net:27017,cluster0-shard-00-02-67gm7.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin';
 mongoose.connect(mongoDB);
 mongoose.Promise = global.Promise;
 var db = mongoose.connection;

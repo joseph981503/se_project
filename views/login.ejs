@@ -7,6 +7,9 @@
     <script src="/javascripts/md5.js"></script>
   </head>
   <body style="text-align: center">
+    <div class="st-loading">
+      <img src="/img/loading.svg" />
+    </div>
     <div class="loginPanel">
       <h5>歡迎使用政大學生校務系統</h5>
       <p class="loginHint">輸入您的學號與密碼以繼續</p>
@@ -21,6 +24,8 @@
   $(document).keyup(function(e) {
    if (e.keyCode == 13) {
       if($('.inputPass').val()!=""&&$('.inputUser').val()!=""){
+        $('body').addClass('is-loading');
+        $('.st-loading').fadeIn(500);
         var hash = hex_md5($('.inputPass').val());
         $.post('/ajax_login',{
           username:$('.inputUser').val(),
@@ -40,6 +45,8 @@
     });
     $('body').on('click','button',function(){
       var hash = hex_md5($('.inputPass').val());
+      $('body').addClass('is-loading');
+      $('.st-loading').fadeIn(500);
       $.post('/ajax_login',{
         username:$('.inputUser').val(),
         pwd:hash
