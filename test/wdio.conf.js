@@ -125,11 +125,12 @@ exports.config = {
     // Test reporter for stdout.
     // The only one supported by default is 'dot'
     // see also: http://webdriver.io/guide/reporters/dot.html
-    reporters: ['dot', 'allure'],
+    reporters: ['dot', 'mochawesome'],
+    // !!!! DON'T USE ALLURE !!!!! With allure, test can pass actually will fail
     reporterOptions: {
-        allure: {
-            outputDir: './test/allure-results'
-        }
+	outputDir: './test/mochawesome-report', //json file will be written to this directory
+	includeScreenshots:true,		// seems that it not work
+	screenshotUseRelativePath:true
     },
     //
     // If you are using Cucumber you need to specify the location of your step definitions.
